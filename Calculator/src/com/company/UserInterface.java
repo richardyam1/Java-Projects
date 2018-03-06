@@ -35,18 +35,23 @@ public class UserInterface implements Runnable {
         JPanel numberRow3 = new JPanel();
         JPanel numberRow4 = new JPanel();
         numberTextField.setLayout(new BorderLayout());
-        numberTextField.add(new JTextField(), BorderLayout.NORTH);
+        numberTextField.add(new JTextField(), BorderLayout.SOUTH);
         createButtonRow(numberRow1, 7, 9);
         createButtonRow(numberRow2, 4,6);
         createButtonRow(numberRow3, 1, 3);
 
         container.add(numberTextField, BorderLayout.PAGE_START);
         container.setLayout(calculatorLayout);
+
         JButton zero = new JButton("0");
         zero.setPreferredSize(new Dimension(87,26));
         numberRow4.add(zero);
         numberRow4.add(new JButton("."));
 
+        numberRow1.add(new JButton("/"));
+        numberRow2.add(new JButton("*"));
+        numberRow3.add(new JButton("-"));
+        numberRow4.add(new JButton("+"));
 
         container.add(numberRow1);
         container.add(numberRow2);
