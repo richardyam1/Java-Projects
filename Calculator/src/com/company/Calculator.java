@@ -8,11 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-public class UserInterface implements Runnable {
+public class Calculator implements Runnable {
     private JFrame frame;
+    private Calculate cal;
 
-    public UserInterface(){
-
+    public Calculator(Calculate cal){
+        this.cal = cal;
     }
 
     public void run(){
@@ -37,12 +38,6 @@ public class UserInterface implements Runnable {
         JPanel numberRow2 = new JPanel();
         JPanel numberRow3 = new JPanel();
         JPanel numberRow4 = new JPanel();
-        JButton back = new JButton("\u2190");
-        JButton clear = new JButton("C");
-        JButton plus = new JButton("+");
-        JButton multi = new JButton("*");
-        JButton divide = new JButton("/");
-        JButton minus = new JButton("-");
         JButton num0 = new JButton("0");
         num0.setPreferredSize(new Dimension(87,26));
         JButton num1 = new JButton("1");
@@ -54,10 +49,16 @@ public class UserInterface implements Runnable {
         JButton num7 = new JButton("7");
         JButton num8 = new JButton("8");
         JButton num9 = new JButton("9");
+        JButton back = new JButton("\u2190");
+        JButton clear = new JButton("C");
+        JButton plus = new JButton("+");
+        JButton multi = new JButton("*");
+        JButton divide = new JButton("/");
+        JButton minus = new JButton("-");
         JButton decimal = new JButton(".");
         JButton equal = new JButton("=");
         //equal.setPreferredSize(new Dimension(60,60));
-
+        ClickListener listener = new ClickListener(this.cal, display, num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, back, clear, plus, multi, divide, minus, decimal, equal);
         numberTextField.setLayout(new BorderLayout());
         numberTextField.add(display, BorderLayout.SOUTH);
 
