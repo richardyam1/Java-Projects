@@ -31,7 +31,7 @@ public class Calculator implements Runnable {
     private void createComponents(Container container){
         JPanel numberTextField = new JPanel();
         JTextField display = new JTextField();
-        //display.setEditable(false);
+
         GridLayout calculatorLayout = new GridLayout(5,4,30,20);
 
         JPanel numberRow1 = new JPanel();
@@ -58,8 +58,10 @@ public class Calculator implements Runnable {
         JButton decimal = new JButton(".");
         JButton equal = new JButton("=");
         //equal.setPreferredSize(new Dimension(60,60));
-        ClickListener listener = new ClickListener(this.cal, display, num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, back, clear, plus, multi, divide, minus, decimal, equal);
+
         numberTextField.setLayout(new BorderLayout());
+        display.setEditable(false);
+        display.setText("0");
         numberTextField.add(display, BorderLayout.SOUTH);
 
         container.add(numberTextField, BorderLayout.PAGE_START);
@@ -95,7 +97,27 @@ public class Calculator implements Runnable {
         container.add(numberRow3);
         container.add(numberRow4);
 
+        ClickListener listener = new ClickListener(this.cal, display, num0, num1, num2, num3, num4, num5, num6, num7, num8, num9,
+                back, clear, plus, multi, divide, minus, decimal, equal);
 
+        num0.addActionListener(listener);
+        num1.addActionListener(listener);
+        num2.addActionListener(listener);
+        num3.addActionListener(listener);
+        num4.addActionListener(listener);
+        num5.addActionListener(listener);
+        num6.addActionListener(listener);
+        num7.addActionListener(listener);
+        num8.addActionListener(listener);
+        num9.addActionListener(listener);
+        back.addActionListener(listener);
+        clear.addActionListener(listener);
+        plus.addActionListener(listener);
+        multi.addActionListener(listener);
+        divide.addActionListener(listener);
+        minus.addActionListener(listener);
+        decimal.addActionListener(listener);
+        equal.addActionListener(listener);
 
     }
 

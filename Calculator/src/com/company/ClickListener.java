@@ -24,7 +24,7 @@ public class ClickListener implements ActionListener{
     private JButton minus;
     private JButton decimal;
     private JButton equal;
-
+    private String s;
     public ClickListener(Calculate cal, JTextField display, JButton num0, JButton num1, JButton num2, JButton num3, JButton num4, JButton num5, JButton num6,
                          JButton num7, JButton num8, JButton num9, JButton back, JButton clear,
                          JButton plus, JButton multi, JButton divide, JButton minus, JButton decimal, JButton equal){
@@ -48,10 +48,61 @@ public class ClickListener implements ActionListener{
         this.minus = minus;
         this.decimal = decimal;
         this.equal = equal;
-
+        this.s = "";
     }
 
     public void actionPerformed(ActionEvent e){
+        if(e.getSource() == clear){
+            cal.resetValue();
+            display.setText("0");
+            s = "";
+        }
+        else if(e.getSource() == num0 && s.length() >= 1){
+            s += "0";
+            display.setText(s);
+        }
+        else if(e.getSource() == num1){
+            s += "1";
+            display.setText(s);
+        }
+        else if(e.getSource() == num2){
+            s += "2";
+            display.setText(s);
+        }
+        else if(e.getSource() == num3){
+            s += "3";
+            display.setText(s);
+        }
+        else if(e.getSource() == num4){
+            s += "4";
+            display.setText(s);
+        }
+        else if(e.getSource() == num5){
+            s += "5";
+            display.setText(s);
+        }
+        else if(e.getSource() == num6){
+            s += "6";
+            display.setText(s);
+        }
+        else if(e.getSource() == num7){
+            s += "7";
+            display.setText(s);
+        }
+        else if(e.getSource() == num8){
+            s += "8";
+            display.setText(s);
+        }
+        else if(e.getSource() == num9){
+            s += "9";
+            display.setText(s);
+        }
+        else if(e.getSource() == plus){
+            s += "+";
+            display.setText(s);
+        }
+        else if(e.getSource() == equal){
 
+        }
     }
 }
