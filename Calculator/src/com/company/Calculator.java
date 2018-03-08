@@ -10,10 +10,10 @@ import javax.swing.WindowConstants;
 
 public class Calculator implements Runnable {
     private JFrame frame;
-    private Calculate cal;
 
-    public Calculator(Calculate cal){
-        this.cal = cal;
+
+    public Calculator(){
+
     }
 
     public void run(){
@@ -88,8 +88,8 @@ public class Calculator implements Runnable {
         numberRow1.add(clear);
         numberRow2.add(plus);
         numberRow2.add(multi);
-        numberRow3.add(divide);
         numberRow3.add(minus);
+        numberRow3.add(divide);
 
 
         container.add(numberRow1);
@@ -97,7 +97,7 @@ public class Calculator implements Runnable {
         container.add(numberRow3);
         container.add(numberRow4);
 
-        ClickListener listener = new ClickListener(this.cal, display, num0, num1, num2, num3, num4, num5, num6, num7, num8, num9,
+        ClickListener listener = new ClickListener(display, num0, num1, num2, num3, num4, num5, num6, num7, num8, num9,
                 back, clear, plus, multi, divide, minus, decimal, equal);
 
         num0.addActionListener(listener);
