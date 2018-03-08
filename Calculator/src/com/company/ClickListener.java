@@ -1,10 +1,13 @@
 package com.company;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class ClickListener implements ActionListener{
 
-    private Calculate cal;
+
     private JTextField display;
     private JButton num0;
     private JButton num1;
@@ -25,10 +28,11 @@ public class ClickListener implements ActionListener{
     private JButton decimal;
     private JButton equal;
     private String s;
-    public ClickListener(Calculate cal, JTextField display, JButton num0, JButton num1, JButton num2, JButton num3, JButton num4, JButton num5, JButton num6,
+    private boolean signAtEnd = false;
+    public ClickListener( JTextField display, JButton num0, JButton num1, JButton num2, JButton num3, JButton num4, JButton num5, JButton num6,
                          JButton num7, JButton num8, JButton num9, JButton back, JButton clear,
                          JButton plus, JButton multi, JButton divide, JButton minus, JButton decimal, JButton equal){
-        this.cal = cal;
+
         this.display = display;
         this.num0 = num0;
         this.num1 = num1;
@@ -53,56 +57,80 @@ public class ClickListener implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == clear){
-            cal.resetValue();
             display.setText("0");
             s = "";
         }
         else if(e.getSource() == num0 && s.length() >= 1){
-            s += "0";
-            display.setText(s);
+            writeNum("0");
         }
         else if(e.getSource() == num1){
-            s += "1";
-            display.setText(s);
+            writeNum("1");
         }
         else if(e.getSource() == num2){
-            s += "2";
-            display.setText(s);
+            writeNum("2");
         }
         else if(e.getSource() == num3){
-            s += "3";
-            display.setText(s);
+            writeNum("3");
         }
         else if(e.getSource() == num4){
-            s += "4";
-            display.setText(s);
+            writeNum("4");
         }
         else if(e.getSource() == num5){
-            s += "5";
-            display.setText(s);
+            writeNum("5");
         }
         else if(e.getSource() == num6){
-            s += "6";
-            display.setText(s);
+            writeNum("6");
         }
         else if(e.getSource() == num7){
-            s += "7";
-            display.setText(s);
+            writeNum("7");
         }
         else if(e.getSource() == num8){
-            s += "8";
-            display.setText(s);
+            writeNum("8");
         }
         else if(e.getSource() == num9){
-            s += "9";
-            display.setText(s);
+            writeNum("9");
         }
         else if(e.getSource() == plus){
-            s += "+";
-            display.setText(s);
+            writeSign("+");
+        }
+        else if(e.getSource() == minus){
+            writeSign("-");
+        }
+        else if(e.getSource() == multi){
+            writeSign("*");
+        }
+        else if(e.getSource() == divide){
+            writeSign("/");
+        }
+        else if(e.getSource() == decimal && s.length() != 0){
+
+            writeNum(".");
         }
         else if(e.getSource() == equal){
+            ScriptEngine engine = new ScriptEngineManager().getEngineByExtension("js");
+            try{
+                Object result = engine.eval(s);
+                s = result + "";
+                display.setText(s);
+            }
+            catch(ScriptException error){
+                error.printStackTrace();
+            }
 
+        }
+    }
+
+    public void writeNum(String num){
+        s += num;
+        display.setText(s);
+        signAtEnd = false;
+    }
+
+    public void writeSign(String sign){
+        if(signAtEnd == false){
+            s += sign;
+            display.setText(s);
+            signAtEnd = true;
         }
     }
 }
