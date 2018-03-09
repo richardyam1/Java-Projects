@@ -29,6 +29,7 @@ public class ClickListener implements ActionListener{
     private JButton equal;
     private String s;
     private boolean signAtEnd = false;
+    private boolean usedDecimal = false;
     public ClickListener( JTextField display, JButton num0, JButton num1, JButton num2, JButton num3, JButton num4, JButton num5, JButton num6,
                          JButton num7, JButton num8, JButton num9, JButton back, JButton clear,
                          JButton plus, JButton multi, JButton divide, JButton minus, JButton decimal, JButton equal){
@@ -59,6 +60,10 @@ public class ClickListener implements ActionListener{
         if(e.getSource() == clear){
             display.setText("0");
             s = "";
+        }
+        else if(e.getSource() == back){
+            s = s.substring(0, s.length()-1);
+            display.setText(s);
         }
         else if(e.getSource() == num0 && s.length() >= 1){
             writeNum("0");
@@ -102,9 +107,13 @@ public class ClickListener implements ActionListener{
         else if(e.getSource() == divide){
             writeSign("/");
         }
-        else if(e.getSource() == decimal && s.length() != 0){
-
-            writeNum(".");
+        else if(e.getSource() == decimal && usedDecimal == false){
+            if(s.length() == 0){
+                s += "0";
+            }
+            s += ".";
+            display.setText(s);
+            usedDecimal = true;
         }
         else if(e.getSource() == equal){
             ScriptEngine engine = new ScriptEngineManager().getEngineByExtension("js");
@@ -131,6 +140,7 @@ public class ClickListener implements ActionListener{
             s += sign;
             display.setText(s);
             signAtEnd = true;
+            usedDecimal = false;
         }
     }
 }
