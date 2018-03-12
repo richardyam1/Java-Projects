@@ -62,6 +62,11 @@ public class ClickListener implements ActionListener{
             s = "";
         }
         else if(e.getSource() == back){
+            String decimal = "";
+            decimal += s.charAt(s.length() - 1);
+            if(decimal.equals(".")){
+                usedDecimal = false;
+            }
             s = s.substring(0, s.length()-1);
             display.setText(s);
         }
@@ -108,7 +113,9 @@ public class ClickListener implements ActionListener{
             writeSign("/");
         }
         else if(e.getSource() == decimal && usedDecimal == false){
-            if(s.length() == 0){
+            String last = "";
+            last += s.charAt(s.length() - 1);
+            if(s.length() == 0 || last.equals("+") || last.equals("-") || last.equals("*") || last.equals("/")){
                 s += "0";
             }
             s += ".";
